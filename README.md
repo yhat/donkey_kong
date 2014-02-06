@@ -3,6 +3,11 @@ donkey_kong
 
 Send mandrill templates from the command line.
 
+### Installation
+
+```
+$ pip install donkey_kong
+```
 
 ```
 Usage:

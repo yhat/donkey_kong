@@ -3,7 +3,7 @@ from setuptools import find_packages
 
 setup(
     name='donkey_kong',
-    version='0.2',
+    version='0.3',
     author="Jessie Frazelle",
     author_email="jessie@yhathq.com",
     url="https://github.com/yhat/donkey_kong",
