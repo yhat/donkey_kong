@@ -28,7 +28,7 @@ parser = MyHTMLParser()
 
 
 def check_creds():
-    path = os.path.join(os.environ['HOME'], '.mandrill_send')
+    path = os.path.join(os.environ['HOME'], '.donkey_kong')
     if os.path.isdir(path) is False:
         credentials.setup()
 

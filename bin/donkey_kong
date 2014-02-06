@@ -2,16 +2,16 @@
 
 help_man = """
 Usage:
-    mandrill_send <command> [params]
+    donkey_kong <command> [params]
 
 Options:
-    mandrill_send --help
-    mandrill_send --version
+    donkey_kong --help
+    donkey_kong --version
 
 Commands:
     setup:
         Prompts the user for their credentials and the saves them
-        to a mandrill_send "dot" file.
+        to a donkey_kong "dot" file.
 
     config:
         Returns the users configurations.
@@ -32,8 +32,8 @@ from colorama import init
 from colorama import Fore
 from prettytable import PrettyTable
 
-from mandrill_send import credentials
-from mandrill_send import main
+from donkey_kong import credentials
+from donkey_kong import main
 
 init()
 

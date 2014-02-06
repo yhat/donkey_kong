@@ -1,21 +1,21 @@
-mandrill\_send
-==============
+donkey\_kong
+============
 
 Send mandrill templates from the command line.
 
 ::
 
     Usage:
-        mandrill_send <command> [params]
+        donkey_kong <command> [params]
 
     Options:
-        mandrill_send --help
-        mandrill_send --version
+        donkey_kong --help
+        donkey_kong --version
 
     Commands:
         setup:
             Prompts the user for their credentials and the saves them
-            to a mandrill_send "dot" file.
+            to a donkey_kong "dot" file.
 
         config:
             Returns the users configurations.

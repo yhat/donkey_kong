@@ -6,13 +6,13 @@ import os
 def setup():
     """
     Prompts the user for their credentials and the saves them
-    to a mandrill_send "dot" file.
+    to a donkey_kong "dot" file.
     """
     username = raw_input("Mandrill username: ")
     apikey = raw_input("Mandrill apikey: ")
     from_email = raw_input("Default from email address: ")
     from_name = raw_input("Default from name: ")
-    path = os.path.join(os.environ['HOME'], '.mandrill_send')
+    path = os.path.join(os.environ['HOME'], '.donkey_kong')
     if os.path.isdir(path) is False:
         os.mkdir(path)
     with open(os.path.join(path, '.config'), 'w') as f:
@@ -38,5 +38,5 @@ def read():
         }
     """
     data = open(os.path.join(os.environ['HOME'],
-                '.mandrill_send', '.config')).read()
+                '.donkey_kong', '.config')).read()
     return json.loads(base64.decodestring(data))
