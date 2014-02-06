@@ -118,7 +118,7 @@ def send(template_name):
         msg['From'] = t_o['from_name']+' <'+t_o['from_email']+'>'
         msg['To'] = t_o['to_email']
 
-        content = r_t['html'].encode('utf-8').strip()
+        content = r_t['html'].encode('ascii', 'xmlcharrefreplace')
         html = MIMEText(content, 'html')
 
         username = creds['username']
