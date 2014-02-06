@@ -57,5 +57,3 @@ def send():
     result = prompt_user(creds)
     while result is None:
         result = prompt_user()
-
-    print result
