@@ -21,9 +21,10 @@ Commands:
         Returns the users configurations.
 
     list:
-        Return a table with your current mailchimp templates data.
+        Return a table with your current mailchimp templates data,
+        and any custom variables you have.
 
-    send:
+    send <template_name>:
         Prompts the user for the template name, from email address, from name,
         to email address, to name, subject, and any variables that get
         passed to the template. Then sends the template. 
