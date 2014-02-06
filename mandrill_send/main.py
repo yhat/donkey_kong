@@ -22,17 +22,24 @@ def list():
     print table
 
 
-def prompt_user():
-    choices = ['Template Name', 'From Email Address', 'From Name',
-               'To Email Address', 'To Name', 'Subject']
+def prompt_user(creds):
+    choices = {'template_name': 'Template Name',
+               'from_email': 'From Email Address', 'from_name': 'From Name',
+               'to_email': 'To Email Address', 'to_name': 'To Name',
+               'subject': 'Subject'}
     choices_lookup = {}
     print "" + Fore.CYAN
     table = PrettyTable([Fore.YELLOW + "Key", Fore.YELLOW + "Value"])
-    for i, choice in enumerate(choices):
-        choices_lookup[str(i+1)] = raw_input(choice + ': ')
+    for key, choice in choices.items():
+        try:
+            choices_lookup[key] = raw_input(choice + ' (' + creds[key] + '): ')
+            if choices_lookup[key] == '':
+                choices_lookup[key] = creds[key]
+        except Exception:
+            choices_lookup[key] = raw_input(choice + ': ')
         table.add_row([
-            Fore.YELLOW + choice,
-            Fore.GREEN + choices_lookup[str(i+1)]
+            Fore.YELLOW + key,
+            Fore.GREEN + choices_lookup[key]
         ])
     print "" + Fore.YELLOW
     print table
@@ -46,8 +53,8 @@ def send():
     passed to the template. Then sends the template.
     """
     check_creds()
-    # creds = credentials.read()
-    result = prompt_user()
+    creds = credentials.read()
+    result = prompt_user(creds)
     while result is None:
         result = prompt_user()
 
