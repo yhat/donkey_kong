@@ -1,0 +1,62 @@
+#!/usr/bin/env python
+
+help_man = """
+Usage:
+    mandrill_send <command> [params]
+
+Options:
+    mandrill_send --help
+    mandrill_send --version
+
+Commands:
+    setup:
+        Prompts the user for their credentials and the saves them
+        to a mandrill_send "dot" file.
+
+    config:
+        Returns the users configurations.
+
+    list:
+        Return a table with your current mailchimp templates data,
+        and any custom variables you have.
+
+    send <template_name>:
+        Prompts the user for the template name, from email address,
+        from name, to email address, to name, subject, and any
+        variables that get passed to the template.
+        Then it sends the template.
+"""
+import sys
+
+from colorama import init
+from colorama import Fore
+from prettytable import PrettyTable
+
+from mandrill_send import credentials
+from mandrill_send import main
+
+init()
+
+if __name__ == "__main__":
+    if len(sys.argv) > 1:
+        if sys.argv[1] == "config":
+            main.check_creds()
+            # print out the user's saved config
+            print "" + Fore.GREEN
+            table = PrettyTable([Fore.GREEN + "Key", Fore.GREEN + "Value"])
+            for key, value in credentials.read().items():
+                table.add_row([Fore.CYAN + key, Fore.CYAN + value])
+            print table
+        elif sys.argv[1] == "setup":
+            credentials.setup()
+        elif sys.argv[1] == "list":
+            main.list()
+        elif sys.argv[1] == "send":
+            if len(sys.argv) > 2:
+                main.send(sys.argv[2])
+            else:
+                print 'You need a template name.'
+        else:
+            print help_man
+    else:
+        print help_man
