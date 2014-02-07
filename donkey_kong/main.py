@@ -98,7 +98,8 @@ def send(template_name):
         parser.feed(template['code'])
 
         choices = {'from_email': 'From Email Address',
-                   'from_name': 'From Name', 'to_email': 'To Email Address',
+                   'from_name': 'From Name',
+                   'to_email': 'To Email Address(es), comma seperated',
                    'subject': 'Subject'}
         for data in parser.data:
             choices[data] = 'Template Option-> ' + data
@@ -112,24 +113,22 @@ def send(template_name):
         r_t = mandrill_client.templates.render(template_name=template_name,
                                                template_content=t_c)
 
-        msg = MIMEMultipart('alternative')
-
-        msg['Subject'] = t_o['subject']
-        msg['From'] = t_o['from_name']+' <'+t_o['from_email']+'>'
-        msg['To'] = t_o['to_email']
-
-        content = r_t['html'].encode('ascii', 'xmlcharrefreplace')
-        html = MIMEText(content, 'html')
-
-        username = creds['username']
-        password = creds['apikey']
-
-        msg.attach(html)
-
         s = smtplib.SMTP('smtp.mandrillapp.com', 587)
+        s.login(creds['username'], creds['apikey'])
 
-        s.login(username, password)
-        s.sendmail(msg['From'], msg['To'], msg.as_string())
+        # Iterate over the list of "To Email Addresses"
+        for email in t_o['to_email'].strip().split(','):
+            msg = MIMEMultipart('alternative')
+
+            msg['Subject'] = t_o['subject']
+            msg['From'] = t_o['from_name']+' <'+t_o['from_email']+'>'
+            msg['To'] = email.strip()
+
+            content = r_t['html'].encode('ascii', 'xmlcharrefreplace')
+            html = MIMEText(content, 'html')
+
+            msg.attach(html)
+            s.sendmail(msg['From'], msg['To'], msg.as_string())
 
         s.quit()
 

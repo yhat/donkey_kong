@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 help_man = """
-Donkey Kong v 0.3
+Donkey Kong v 0.4
 Send mandrill templates from the command line.
 
 Usage:
@@ -25,7 +25,7 @@ Commands:
 
     send <template_name>:
         Prompts the user for the template name, from email address,
-        from name, to email address, to name, subject, and any
+        from name, to email address(es), subject, and any
         variables that get passed to the template.
         Then it sends the template.
 """
